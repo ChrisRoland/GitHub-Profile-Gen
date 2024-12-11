@@ -1,3 +1,3 @@
-# GitHub-Profile-Gen
+# GitHub-Profile-Generator
 
 ![project img](image.png)
