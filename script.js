@@ -61,7 +61,7 @@ function userInfo(user) {
         </div>`;
 
     main.innerHTML = cardHtml;
-} 
+}
 
 function noUserFound(msg) { 
     const errHtml = `
