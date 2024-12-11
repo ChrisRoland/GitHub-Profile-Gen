@@ -3,17 +3,17 @@ const form = document.getElementById("form");
 const search = document.getElementById("search");
 const main = document.getElementById("main");
 
-const toggle = document.querySelector(".toggle")
+const toggle = document.querySelector(".toggle");
 
 async function getUser(username) {
   try {
     const { data } = await axios.get(APIURL + username);
 
     userInfo(data);
-    getUserRepos(username)
+    getUserRepos(username);
   } catch (err) {
-    if(err.response.status == 404) {
-        noUserFound("No profiles match your search")
+    if (err.response.status == 404) {
+      noUserFound("No profiles match your search");
     }
 
     console.log(err);
@@ -26,8 +26,8 @@ async function getUserRepos(username) {
 
     addUserRepos(data);
   } catch (err) {
-    if(err.response.status == 404) {
-        noUserFound("Error fetching repos")
+    if (err.response.status == 404) {
+      noUserFound("Error fetching repos");
     }
 
     console.log(err);
@@ -35,7 +35,7 @@ async function getUserRepos(username) {
 }
 
 function userInfo(user) {
-    const cardHtml = `
+  const cardHtml = `
         <div class="card">
             <div>
             <img
@@ -60,46 +60,43 @@ function userInfo(user) {
             </div>
         </div>`;
 
-    main.innerHTML = cardHtml;
+  main.innerHTML = cardHtml;
 }
 
-function noUserFound(msg) { 
-    const errHtml = `
+function noUserFound(msg) {
+  const errHtml = `
         <div class="card">
             <div>
                 ${msg}
             </div>
         </div>`;
 
-        main.innerHTML = errHtml;
+  main.innerHTML = errHtml;
 }
 
 function addUserRepos(repos) {
-    const repoSection = document.getElementById("repos")
+  const repoSection = document.getElementById("repos");
 
-    repos
-    .slice(0,10)
-    .forEach(repo => {
-        const repoLinks = document.createElement("a")
+  repos.slice(0, 10).forEach((repo) => {
+    const repoLinks = document.createElement("a");
 
-        repoLinks.classList.add("repo")
-        repoLinks.href = repo.html_url
-        repoLinks.target = "_blank"
-        repoLinks.innerText = repo.name
+    repoLinks.classList.add("repo");
+    repoLinks.href = repo.html_url;
+    repoLinks.target = "_blank";
+    repoLinks.innerText = repo.name;
 
-        repoSection.appendChild(repoLinks)
-    })
-
+    repoSection.appendChild(repoLinks);
+  });
 }
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const user = search.value;
+  const user = search.value;
 
-    if (user) {
-        getUser(user);
+  if (user) {
+    getUser(user);
 
-        search.value = "";
-    }
+    search.value = "";
+  }
 });
