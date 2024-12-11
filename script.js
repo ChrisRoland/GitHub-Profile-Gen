@@ -13,7 +13,7 @@ async function getUser(username) {
     getUserRepos(username)
   } catch (err) {
     if(err.response.status == 404) {
-        errorMessage("No profiles match your search")
+        noUserFound("No profiles match your search")
     }
 
     console.log(err);
@@ -48,7 +48,7 @@ function userInfo(user) {
             <div class="user-info">
             <h2>${user.name}</h2>
             <p>${user.bio}</p>
-            <p>${user.twitter_username}</p>
+            <p><i class="fas fab fa-twitter"></i> @ ${user.twitter_username}</p>
 
             <ul>
                 <li>${user.followers}<strong>Followers</strong></li>
